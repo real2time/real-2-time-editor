@@ -1,0 +1,36 @@
+{
+  "name": "r2t",
+  "version": "0.0.1",
+  "description": "Real 2 Time: Your real real time infrastructure",
+  "author": "jose manuel santorum <jmsantorum@gmail.com>, adrian portabales goberna <adrianportabales@gmail.com>",
+  "bugs": {
+    "url": "http://github.com/"
+  },
+  "os": [
+    "linux"
+  ],
+  "contributors": [
+    "jose manuel santorum <jmsantorum@gmail.com>",
+    "adrian portabales goberna <adrianportabales@gmail.com>"
+  ],
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "bin": {
+    "r2t": "./server.js"
+  },
+  "dependencies": {
+    "express": "2.5.6",
+    "mongodb": "0.9.8",
+    "cron": ">=0.1.3",
+    "ejs": "0.6.1",
+    "connect": "1.8.5",
+    "connect-mongodb": "1.1.2",
+    "npm": "1.3.10",
+    "xml2js-expat": ">=0.2.0",
+    "http-proxy": "1.8.1"
+  }
+}

@@ -1,0 +1,61 @@
+zookeeper:
+    image: wurstmeister/zookeeper:0.9.3
+    ports:
+        - "22"
+
+nimbus:
+    image: wurstmeister/storm-nimbus:0.9.3
+    ports:
+        - "22"
+    links:
+        - zookeeper:zk
+
+supervisor:
+    image: wurstmeister/storm-supervisor:0.9.3
+    ports:
+        - "8000"
+        - "22"
+    links:
+        - nimbus:nimbus
+        - zookeeper:zk
+
+ui:
+    image: wurstmeister/storm-ui:0.9.3
+    ports:
+        - "8080"
+        - "22"
+    links:
+    - nimbus:nimbus
+    - zookeeper:zk
+
+mongo:
+    image: mongo:2.8.0
+
+r2tstorm:
+    image: real2time/real-2-time-storm:alpha-0.0.1
+    ports:
+        - "22"
+    links:
+        - nimbus:nimbus
+    environment:
+        - NIMBUS_HOST=nimbus
+        - R2T_STORM_LISTEN_PORT=44420
+
+r2teditor:
+    image: real2time/real-2-time-editor:alpha-0.0.1
+    ports:
+        - "48080:8080"
+        - "48081:48081"
+        - "22"
+    links:
+        - ui:ui
+        - mongo:mongo
+        - r2tstorm:r2t_storm
+    environment:
+        - R2T_EDITOR_DATABASE_HOST=mongo
+        - R2T_EDITOR_DATABASE_PORT=27017
+        - R2T_EDITOR_STORM_SERVER_UI_HOST=ui
+        - R2T_EDITOR_STORM_SERVER_UI_PORT=8080
+        - R2T_EDITOR_PROXY_STORM_SERVER_UI_PORT=48081
+        - R2T_STORM_LISTEN_HOST=r2t_storm
+        - R2T_STORM_LISTEN_PORT=44420
