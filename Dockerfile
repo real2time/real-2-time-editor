@@ -21,7 +21,7 @@ RUN mkdir -p /var/run/sshd /var/log/supervisor
 
 RUN echo 'root:real2time' | chpasswd; sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-RUN cd /opt; git clone https://github.com/real2time/real-2-time-editor.git; cd real-2-time-editor; npm install .
+RUN cd /opt; git clone https://github.com/real2time/real-2-time-editor.git; cd real-2-time-editor; git checkout alpha-0.0.1; npm install .
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /entrypoint.sh
