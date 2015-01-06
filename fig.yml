@@ -1,5 +1,5 @@
 zookeeper:
-    image: wurstmeister/zookeeper:0.9.3
+    image: wurstmeister/zookeeper
     ports:
         - "22"
 
